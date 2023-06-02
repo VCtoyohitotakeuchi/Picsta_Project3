@@ -41,8 +41,9 @@
     
   </head>
   <body>
-    
+    <!-- ページのヘッダー -->
 <header>
+     <!-- ナビゲーションバーのヘッダー -->
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
@@ -57,14 +58,14 @@
             <!--ナビゲーションメニューのリンクテキスト-->
             {% if user.is_authenticated %}
             <!--ログイン中のメニュー-->
-            <li><a href="{% url 'photo:mypage' %}" class="text-white">まいぺーじ</a></li>
-            <li><a href="{% url 'accounts:logout' %}" class="text-white">Logout</a></li>
+            <li><a href="{% url 'photo:mypage' %}" class="text-white">マイページ</a></li>
+            <li><a href="{% url 'accounts:logout' %}" class="text-white">ログアウト</a></li>
             <li><a href="{% url 'password_reset' %}" class="text-white">パスワードのリセット</a></li>
             <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
             {% else %}
             <!--ログイン状態ではない場合のメニュー-->
-            <li><a href="{% url 'accounts:signup' %}" class="text-white">Sign Up</a></li>
-            <li><a href="{% url 'accounts:login' %}" class="text-white">Login</a></li>
+            <li><a href="{% url 'accounts:signup' %}" class="text-white">サインアップ</a></li>
+            <li><a href="{% url 'accounts:login' %}" class="text-white">ログイン</a></li>
             <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
             {% endif %}
           </ul>
@@ -81,24 +82,26 @@
         <!--リンクテキスト-->
         <strong>自分で決める</strong>
       </a>
+      <!-- トグルボタン -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </div>
 </header>
-
+<!-- メインコンテンツ -->
 <main>
 <!--<main>タグの要素をすべて削除して以下に書き換え-->
 <!--メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
   {% block contents %}{% endblock %}
 
-</main>
 
+</main>
+<!-- フッター -->
 <footer class="text-muted py-5">
   <div class="container">
     <p class="float-end mb-1">
-      <a href="#">Back to top</a>
+      <a href="{% url 'photo:index' %}">Back to top</a>
     </p>
     <p class="mb-1">あああ &copy; いいい</p>
     <!--この行削除p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p-->
