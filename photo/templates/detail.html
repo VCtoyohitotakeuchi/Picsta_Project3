@@ -17,7 +17,16 @@
                 {% endif %}
                 <!-- コメント -->
                 <p>{{object.comment}}</p>
+                <!-- カテゴリー -->
+                <a href="{% url 'photo:photos_cat' category=object.category.id %}">
+                <p>#{{object.category}}</p>
+                </a>
                 <br>
+                <!-- ユーザー名 -->
+                <a href="{% url 'photo:user_list' user=object.user.id %}">
+                <small class="text-muted">
+                    {{object.user.username}}</small>
+                </a>
                 <!-- 投稿日時 -->
                 <p>{{object.posted_at}}に投稿</p>
                 <!-- 1枚目の写真 -->
