@@ -12,6 +12,39 @@
           <div class="card shadow-sm">
             <!--svgタグをimgに変更
                 src属性を追加して1枚目のイメージのURLを設定-->
+                {% if record.image2 %}
+                <div class="bd-placeholder-img card-img-top"
+                            width="100%" height="225" position: relative>
+                <a href = "{% url 'photo:photo_detail' record.pk %}">
+                  <table>
+                    <tr>
+                      <td>
+                      <img src="{{ record.image1.url }}" 
+                      width="100%" height="225"
+                      xmlns="http://www.w3.org/2000/svg"
+                      role="img" aria-label="Placeholder: Thumbnail"
+                      focusable="false">
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c"/>
+                      <!--<text>～</text>を削除-->
+                      </img>
+                    </td>
+                    <td>
+                      <img src="{{ record.image2.url }}" 
+                      width="100%" height="225"
+                      xmlns="http://www.w3.org/2000/svg"
+                      role="img" aria-label="Placeholder: Thumbnail"
+                      focusable="false">
+                      <title>Placeholder</title>
+                      <rect width="100%" height="100%" fill="#55595c"/>
+                      <!--<text>～</text>を削除-->
+                      </img>
+                    </td>
+                  </tr>
+                </table>
+                </a>
+                </div>
+                {% else %}
                 <a href = "{% url 'photo:photo_detail' record.pk %}">
                   <img src="{{ record.image1.url }}" 
                   class="bd-placeholder-img card-img-top"
@@ -25,6 +58,7 @@
                   <!--<text>～</text>を削除-->
                   </img>
                 </a>
+                {% endif %}
             <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
             <!--titleフィールドを出力-->
