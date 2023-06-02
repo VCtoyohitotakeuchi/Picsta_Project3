@@ -38,8 +38,6 @@ class PhotoPost(models.Model):
         Category,
         #フィールドのタイトル
         verbose_name='カテゴリ',
-        blank=True, #フィールド値の設定は必須ではない
-        null=True, #データベースにnullが保存されることを許容
         #カテゴリに関連付けられた投稿データが存在する場合は
         #そのカテゴリを削除できないようにする
         on_delete=models.PROTECT
