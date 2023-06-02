@@ -7,7 +7,7 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     '''UserCreationFormのサブクラス
     '''
-    class meta:
+    class Meta:
         '''UserCreationFormのインナークラス
         Attributes:
             model:連携するUserモデル
