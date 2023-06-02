@@ -31,6 +31,17 @@ class PhotoPost(models.Model):
         #ユーザーを削除する場合はそのユーザーの投稿データもすべて削除する
         on_delete=models.CASCADE
         )
+    #Categoryモデル（のtitle）とPhotoPostモデルを
+    #1対多の関係で結び付ける
+    #Categoryが親でPhotoPostが子の関係となる
+    category = models.ForeignKey(
+        Category,
+        #フィールドのタイトル
+        verbose_name='カテゴリ',
+        #カテゴリに関連付けられた投稿データが存在する場合は
+        #そのカテゴリを削除できないようにする
+        on_delete=models.PROTECT
+    )
     #タイトル用のフィールド
     title = models.CharField(
         verbose_name='タイトル', #フィールドのタイトル
