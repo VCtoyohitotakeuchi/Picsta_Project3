@@ -12,4 +12,4 @@ class PhotoPostForm(ModelForm):
          friends: フォームで使用するモデルのフィールドを指定
         '''
         model = PhotoPost
-        friends = ['category', 'title', 'comment', 'image1', 'image2']
+        fields = ['category', 'title', 'comment', 'image1', 'image2']
