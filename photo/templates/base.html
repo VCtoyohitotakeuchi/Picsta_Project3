@@ -93,8 +93,10 @@
 <main>
 <!--<main>タグの要素をすべて削除して以下に書き換え-->
 <!--メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
+  <div class="col offset-2 py-2">
+    <button type="button" onclick="history.back()">前のページへ戻る</button>
+  </div>
   {% block contents %}{% endblock %}
-
 
 </main>
 <!-- フッター -->
