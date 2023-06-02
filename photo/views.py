@@ -1,8 +1,6 @@
 from django.shortcuts import render
 #django.views.genericからTemplateView、ListViewをインポート
 from django.views.generic import TemplateView, ListView
-#django.views.genericからTemplateViewをインポート
-from django.views.generic import TemplateView
 #django.views.genericからCreateViewをインポート
 from django.views.generic import CreateView
 #django.urlsからreverse_lazyをインポート
@@ -207,7 +205,7 @@ class PhotoDeleteView(DeleteView):
             '''
         #スーパークラスのdelete()を実行
         return super().delete(request, *args, **kwargs)
-
+    '''
     def get_queryset(self):
 
 
@@ -218,3 +216,4 @@ class PhotoDeleteView(DeleteView):
             user=user_id).order_by('-posted_at')
         #クエリによって取得されたレコードを返す
         return user_list
+    '''
