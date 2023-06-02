@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views import View
 from . import views
 
 #URLパターンを逆引きできるように名前を付ける
