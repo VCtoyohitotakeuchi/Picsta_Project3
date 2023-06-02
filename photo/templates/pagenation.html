@@ -11,13 +11,13 @@
     前のページが存在する場合はそのページへのリンクが設定されたアイコン[<<]を表示
     Page.previous_page_number:　直前のページ番号を返す
     -->
-    <lf class="page-item">
+    <li class="page-item">
         <a class="page-link"
             href="?page={{ page_obj.previous_page_number }}"
             aria-libel="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
-    </lf>
+    </li>
     {% endif %}
     <!--
     すべてのページについてページ番号のアイコンを表示
@@ -35,9 +35,9 @@
         処理中のページ番号が引き渡されたページのページ番号と一致する場合は
         ページ番号のアイコン（アクティブ状態）を表示（リンクは設定しない）
         -->
-        <lf class="page-item active">
+        <li class="page-item active">
             <span class="page-link">{{ num }}</span>
-        </lf>
+        </li>
         <!--
         ページ番号が引き渡されたページのページ番号と一致しない場合
         -->
@@ -45,9 +45,9 @@
         <!--
         ページ番号のアイコン（アクティブ状態ではない）にリンクを設定して表示
         -->
-        <lf class="page-item">
-            <a class="page-link" href"?page{{ num }}">{{ num }}</a>
-        </lf>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
         {% endif %}
     {% endfor %}
     <!--
@@ -59,12 +59,12 @@
     次ページが存在する場合はリンクを設定したアイコン[>>]を表示
     Page.next_page_number:　次のページ番号を返す
     -->
-    <lf class="page-item">
+    <li class="page-item">
         <a class="page-link"
             href="?page={{ page_obj.next_page_number }}"
             aria-label="Next">
-            <dpan aria-hidden="true">&raquo;</span>
+            <span aria-hidden="true">&raquo;</span>
         </a>
-    </lf>
+    </li>
     {% endif %}
 </ul>
