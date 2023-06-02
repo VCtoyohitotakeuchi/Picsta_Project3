@@ -12,7 +12,9 @@
             <!--列の左右に余白ffset-3を入れる -->
             <div class="col offset-3">
                 <!-- タイトル -->
+                {% if object.title %}
                 <h2>{{object.title}}</h2>
+                {% endif %}
                 <!-- コメント -->
                 <p>{{object.comment}}</p>
                 <br>
