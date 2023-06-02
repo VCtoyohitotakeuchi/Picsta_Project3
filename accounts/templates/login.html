@@ -14,7 +14,7 @@
 
     <!--<link rel="canonical"...>を削除-->
     <!--staticでfavicon.icoのURLを生成する-->
-    <link rel="icon" type="image/xicon"
+    <link rel="icon" type="image/x-icon"
           href={% static 'assets/favicon.ico' %}/>
 
     <!-- Bootstrap core CSS -->
@@ -39,7 +39,7 @@
 
     
     <!-- Custom styles for this template -->
-    <!--「static/css/sign.css」-->
+    <!--「static/css/sign.css」の読み込み-->
     <link href={% static "/css/sign.css" %} rel="stylesheet">
   </head>
   <body class="text-center">
@@ -53,7 +53,7 @@
   <form method="post">
     {% csrf_token %}
     <!--Bootstrapのロゴを表示-->
-    <!--「static/img/bootstrap-logo.svg」-->
+    <!--「static/img/bootstrap-logo.svg」の読み込み-->
     <img class="mb-4" src={% static "img/bootstrap-logo.svg"%} alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
@@ -97,7 +97,7 @@
 
     <!--<p>～</p>をパスワードリセットページのリンクテキストに書き換え-->
     <br><br>
-    <p><a href ="#">パスワードを忘れましたか？</a></p>
+    <p><a href ="{% url 'password_reset' %}">パスワードを忘れましたか？</a></p>
     <!--ログイン直後のリダイレクト先（トップページ）のURLパターンを設定-->
     <input type="hidden"
            name="next"
