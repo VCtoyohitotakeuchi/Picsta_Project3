@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 
 <!-- ヘッダー情報のページタイトルを設定する -->
-{% block title %}Post Success{% endlock %}
+{% block title %}Post Success{% endblock %}
 
       {% block contents %}
       <!-- Bootstrap のグリッドシステム -->
@@ -11,9 +11,12 @@
         <!-- 行を配置 -->
         <div class = "row">
             <!-- 列の左右に余白のoffset-2を入れる -->
-            <div class="co1 offset-2">
+                <!--<div class="co1 offset-2">-->
+                <div style="text-align:center">
                 <h4>投稿が完了しました!</h4>
-            </dv>
-        </dv>
-    </dv>
-    {% endlock %}
+                <a href="{% url 'photo:post' %}">続けて投稿する</a>
+                <a href="{% url 'photo:mypage' %}">マイページへ移動する</a>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

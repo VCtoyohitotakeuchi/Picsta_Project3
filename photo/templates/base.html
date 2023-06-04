@@ -41,15 +41,16 @@
     
   </head>
   <body>
-    
+    <!-- ページのヘッダー -->
 <header>
+     <!-- ナビゲーションバーのヘッダー -->
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <!--ヘッダーのタイトルと本文-->
-          <h4 class="text-white">自分で決める</h4>
-          <p class="text-muted">自分で決める</p>
+          <h4 class="text-white">Picstagram</h4>
+          <p class="text-muted">いまなにしてる?</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
@@ -57,14 +58,14 @@
             <!--ナビゲーションメニューのリンクテキスト-->
             {% if user.is_authenticated %}
             <!--ログイン中のメニュー-->
-            <li><a href="{% url 'photo:mypage' %}" class="text-white">まいぺーじ</a></li>
-            <li><a href="{% url 'accounts:logout' %}" class="text-white">Logout</a></li>
+            <li><a href="{% url 'photo:mypage' %}" class="text-white">マイページ</a></li>
+            <li><a href="{% url 'accounts:logout' %}" class="text-white">ログアウト</a></li>
             <li><a href="{% url 'password_reset' %}" class="text-white">パスワードのリセット</a></li>
             <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
             {% else %}
             <!--ログイン状態ではない場合のメニュー-->
-            <li><a href="{% url 'accounts:signup' %}" class="text-white">Sign Up</a></li>
-            <li><a href="{% url 'accounts:login' %}" class="text-white">Login</a></li>
+            <li><a href="{% url 'accounts:signup' %}" class="text-white">サインアップ</a></li>
+            <li><a href="{% url 'accounts:login' %}" class="text-white">ログイン</a></li>
             <li><a href="mailto:admin@example.com" class="text-white">Email me</a></li>
             {% endif %}
           </ul>
@@ -79,28 +80,32 @@
       <a href="{% url 'photo:index' %}" class="navbar-brand d-flex align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <!--リンクテキスト-->
-        <strong>自分で決める</strong>
+        <strong>Picstagram</strong>
       </a>
+      <!-- トグルボタン -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </div>
 </header>
-
+<!-- メインコンテンツ -->
 <main>
 <!--<main>タグの要素をすべて削除して以下に書き換え-->
 <!--メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
   {% block contents %}{% endblock %}
+  <div class="col offset-2 py-4">
+    <button type="button" onclick="history.back()">前のページへ戻る</button>
+  </div>
 
 </main>
-
+<!-- フッター -->
 <footer class="text-muted py-5">
   <div class="container">
     <p class="float-end mb-1">
-      <a href="#">Back to top</a>
+      <a href="{% url 'photo:index' %}">Back to top</a>
     </p>
-    <p class="mb-1">あああ &copy; いいい</p>
+    <p class="mb-1"> &copy; magician</p>
     <!--この行削除p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="../getting-started/introduction/">getting started guide</a>.</p-->
   </div>
 </footer>
