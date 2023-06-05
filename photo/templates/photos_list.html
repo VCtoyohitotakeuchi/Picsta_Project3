@@ -46,9 +46,16 @@
                   </tr>
                 </table>
                 </a>
-                <h5>+2　</h5>
+                  {% if record.image4 %}
+                    <h5>+2　</h5>
+                  {% elif record.image3 %}
+                    <h5>+1　</h5>
+                  {% else %}
+                    <br>
+                  {% endif %}
                 </div>
                 {% else %}
+
                 <a href = "{% url 'photo:photo_detail' record.pk %}">
                   <img src="{{ record.image1.url }}" 
                   class="bd-placeholder-img card-img-top"
