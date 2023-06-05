@@ -35,6 +35,12 @@
                 {% if object.image2 %}
                     <p><img src="{{object.image2.url}}"></img></p>
                 {% endif %}
+                {% if object.mov1 %}
+                <hr>
+                <video src="{{object.mov1.url}}" controls>
+                動画の再生にはHTML5が必要です。
+                </video>
+                {% endif %}
 
             
 

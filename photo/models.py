@@ -70,6 +70,24 @@ class PhotoPost(models.Model):
         blank=True, #フィールド値の設定は必須ではない
         null=True #データベースにnullが保存されることを許容
         )
+    image3 = models.ImageField(
+        verbose_name='イメージ3', #フィールドのタイトル
+        upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
+        blank=True, #フィールド値の設定は必須ではない
+        null=True #データベースにnullが保存されることを許容
+        )
+    image4 = models.ImageField(
+        verbose_name='イメージ4', #フィールドのタイトル
+        upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
+        blank=True, #フィールド値の設定は必須ではない
+        null=True #データベースにnullが保存されることを許容
+        )
+    mov1 = models.FileField(
+        verbose_name='イメージ4', #フィールドのタイトル
+        upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
+        blank=True, #フィールド値の設定は必須ではない
+        null=True #データベースにnullが保存されることを許容
+        )
     #投稿日時のフィールド
     posted_at = models.DateTimeField(
         verbose_name='投稿日時', #フィールドのタイトル
