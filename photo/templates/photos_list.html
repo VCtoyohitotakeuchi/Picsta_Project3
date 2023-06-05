@@ -6,6 +6,9 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <!-- レコードが格納されたobject_listから
              レコードを１行ずつrecordに取り出す -->
+        <head>
+          <link rel="stylesheet" href="../static/css/update.css">
+        </head>
         {% for record in object_list %}
        <!--列要素を配置-->
         <div class="col">
@@ -43,6 +46,7 @@
                   </tr>
                 </table>
                 </a>
+                <h5>+2　</h5>
                 </div>
                 {% else %}
                 <a href = "{% url 'photo:photo_detail' record.pk %}">
@@ -58,7 +62,9 @@
                   <!--<text>～</text>を削除-->
                   </img>
                 </a>
+                <br>
                 {% endif %}
+                
             <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
             <!--titleフィールドを出力-->

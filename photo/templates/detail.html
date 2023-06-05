@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 <!-- ヘッダー情報のページタイトルを設定する -->
 {% block title %}Photo Detail{% endblock %}
-
+    
     {% block contents %}
     <!-- Bootstrapのグリッドシステム -->
     <br>
@@ -11,6 +11,9 @@
         <div class="row">
             <!--列の左右に余白ffset-3を入れる -->
             <div class="col offset-3">
+                <head>
+                    <link rel="stylesheet" href="../static/css/update.css">
+                </head>
                 <!-- タイトル -->
                 {% if object.title %}
                 <h2>{{object.title}}</h2>
