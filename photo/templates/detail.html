@@ -38,6 +38,14 @@
                 {% if object.image2 %}
                     <p><img src="{{object.image2.url}}"></img></p>
                 {% endif %}
+                <!-- 3枚目の写真が投稿されていたら表示する -->
+                {% if object.image3 %}
+                    <p><img src="{{object.image3.url}}"></img></p>
+                {% endif %}
+                <!-- 4枚目の写真が投稿されていたら表示する -->
+                {% if object.image4 %}
+                    <p><img src="{{object.image4.url}}"></img></p>
+                {% endif %}
                 {% if object.mov1 %}
                 <hr>
                 <video src="{{object.mov1.url}}" controls>
