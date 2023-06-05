@@ -3,13 +3,13 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
         <!--タイトルと本文-->
-        <h1 class="fw-light">タイトル</h1>
-        <p class="lead text-muted">説明</p>
+        <h1 class="fw-light">Picstagram</h1>
+        <p class="lead text-muted">今何してる？</p>
         <p>
           <!--ナビゲーションボタン-->
           {% if user.is_authenticated %}
           <!--ログイン中のボタン-->
-          <a href="{% url 'photo:post' %}" class="btn btn-primary my-2">投稿する</a>
+          <a href="{% url 'photo:post' %}" class="btn btn-primary my-2">Post</a>
           <a href="{% url 'accounts:logout' %}" class="btn btn-secondary my-2">Logout</a>
           {% else %}
           <!--ログイン状態ではない場合のボタン-->
