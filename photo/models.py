@@ -40,7 +40,8 @@ class PhotoPost(models.Model):
         verbose_name='カテゴリ',
         #カテゴリに関連付けられた投稿データが存在する場合は
         #そのカテゴリを削除できないようにする
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        default=1,
         
         )
     #タイトル用のフィールド
