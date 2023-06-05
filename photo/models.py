@@ -75,14 +75,14 @@ class PhotoPost(models.Model):
         upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
         blank=True, #フィールド値の設定は必須ではない
         null=True, #データベースにnullが保存されることを許容
-        default = None
+        #default = None
         )
     image4 = models.ImageField(
         verbose_name='イメージ４', #フィールドのタイトル
         upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
         blank=True, #フィールド値の設定は必須ではない
         null=True, #データベースにnullが保存されることを許容
-        default = None
+        #default = None
         )
     mov1 = models.FileField(
         verbose_name='ビデオ1', #フィールドのタイトル
