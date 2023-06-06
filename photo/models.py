@@ -40,7 +40,8 @@ class PhotoPost(models.Model):
         verbose_name='カテゴリ',
         #カテゴリに関連付けられた投稿データが存在する場合は
         #そのカテゴリを削除できないようにする
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        default=1,
         
         )
     #タイトル用のフィールド
@@ -65,6 +66,26 @@ class PhotoPost(models.Model):
     #イメージのフィード２
     image2 = models.ImageField(
         verbose_name='イメージ２', #フィールドのタイトル
+        upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
+        blank=True, #フィールド値の設定は必須ではない
+        null=True #データベースにnullが保存されることを許容
+        )
+    image3 = models.ImageField(
+        verbose_name='イメージ３', #フィールドのタイトル
+        upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
+        blank=True, #フィールド値の設定は必須ではない
+        null=True, #データベースにnullが保存されることを許容
+        #default = None
+        )
+    image4 = models.ImageField(
+        verbose_name='イメージ４', #フィールドのタイトル
+        upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
+        blank=True, #フィールド値の設定は必須ではない
+        null=True, #データベースにnullが保存されることを許容
+        #default = None
+        )
+    mov1 = models.FileField(
+        verbose_name='ビデオ1', #フィールドのタイトル
         upload_to = 'photos', #MEDIA_ROOT以下のphotosにファイルを保存
         blank=True, #フィールド値の設定は必須ではない
         null=True #データベースにnullが保存されることを許容

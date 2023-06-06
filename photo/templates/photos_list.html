@@ -6,6 +6,9 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <!-- レコードが格納されたobject_listから
              レコードを１行ずつrecordに取り出す -->
+        <head>
+          <link rel="stylesheet" href="../static/css/list.css">
+        </head>
         {% for record in object_list %}
        <!--列要素を配置-->
         <div class="col">
@@ -43,8 +46,17 @@
                   </tr>
                 </table>
                 </a>
+                  <!--{% if record.image4 and record.image3 %}{% endif %}-->
+                  {% if record.image4 %}
+                    <h5>+2　</h5>
+                  {% elif record.image3 %}
+                    <h5>+1　</h5>
+                  {% else %}
+                    <br>
+                  {% endif %}
                 </div>
                 {% else %}
+
                 <a href = "{% url 'photo:photo_detail' record.pk %}">
                   <img src="{{ record.image1.url }}" 
                   class="bd-placeholder-img card-img-top"
@@ -58,7 +70,9 @@
                   <!--<text>～</text>を削除-->
                   </img>
                 </a>
+                <br>
                 {% endif %}
+                
             <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
             <!--titleフィールドを出力-->

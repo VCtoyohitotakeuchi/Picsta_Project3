@@ -1,0 +1,13 @@
+img{
+    max-width: 600px;
+    max-height: 700px;
+}
+
+video{
+    max-width: 600px;
+    max-height: 700px;
+}
+
+.p{
+    word-break: break-all;
+}
