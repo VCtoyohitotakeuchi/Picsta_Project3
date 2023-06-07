@@ -63,6 +63,10 @@
                 <a href="{% url 'photo:photo_delete' object.pk %}"
                     class="btn btn-primary my-2">削除する</a>
                 {% endif %}
+                <button type="button"
+                    class="btn btn-sm btn-outline-secondary"
+                    onclick="location.href='{% url 'photo:comment' pk=object.pk %}'">
+                    Comment:{{object.commentcount}}</button>
             </div>
         </div>
     </div>
