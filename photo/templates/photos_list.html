@@ -76,6 +76,9 @@
             <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
             <!--titleフィールドを出力-->
+            {% if record.mov1 %}
+            <text>&#x1f3a5;</text>
+            {% endif %}
             {% if record.title %}
             {{record.title}}
             {% else %}
