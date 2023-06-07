@@ -21,6 +21,7 @@ class Category(models.Model):
 class PhotoPost(models.Model):
     '''投稿されたデータを管理するモデル
     '''
+
     #CustomUserモデル(のuser_id)とPhotoPostモデルを
     #1対多の関係で結びつける
     #CustomUserが親でPhotoPostが子の関係となる
@@ -42,7 +43,6 @@ class PhotoPost(models.Model):
         #そのカテゴリを削除できないようにする
         on_delete=models.PROTECT,
         default=1,
-        
         )
     #タイトル用のフィールド
     title = models.CharField(
@@ -90,6 +90,9 @@ class PhotoPost(models.Model):
         blank=True, #フィールド値の設定は必須ではない
         null=True #データベースにnullが保存されることを許容
         )
+    commentcount =models.IntegerField(
+        default=0
+    )
     #投稿日時のフィールド
     posted_at = models.DateTimeField(
         verbose_name='投稿日時', #フィールドのタイトル
@@ -102,3 +105,32 @@ class PhotoPost(models.Model):
         Returns(str):投稿記事のタイトル
         '''
         return self.title
+
+class subPost(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        #フィールドのタイトル
+        verbose_name='ユーザー',
+        #ユーザーを削除する場合はそのユーザーの投稿データもすべて削除する
+        on_delete=models.CASCADE,
+        default=1
+        )
+    """ superpost =models.IntegerField(
+        default=0
+    ) """
+    #コメント用のフィールド
+    comment = models.TextField(
+        verbose_name='本文', #フィールドのタイトル
+        max_length=200, #最大文字数は200文字
+        )
+    #投稿日時のフィールド
+    posted_at = models.DateTimeField(
+        verbose_name='投稿日時', #フィールドのタイトル
+        auto_now_add=True, #日時を自動追加
+        )
+    def __str__(self):
+        '''オブジェクトを文字列に変換して返す
+
+        Returns(str):投稿記事のコメント
+        '''
+        return self.comment

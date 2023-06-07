@@ -16,6 +16,9 @@ urlpatterns = [
     path('post_done/',
          views.PostSuccessView.as_view(),
          name='post_done'),
+    path('subpost_done/',
+         views.subPostSuccessView.as_view(),
+         name='subpost_done'),
     
     #カテゴリ一覧ページ
     #photos/<Categorysテーブルのid値>にマッチング
@@ -40,6 +43,11 @@ urlpatterns = [
     path('photo-detail/<int:pk>',
          views.DetailView.as_view(),
          name = 'photo_detail'
+        ),
+    #コメント機能
+    path('photo-detail/<int:pk>/subpost',
+         views.subPostView.as_view(),
+         name = 'comment'
         ),
 
     #以下、7.9にて追加する
