@@ -52,10 +52,6 @@ urlpatterns = [
          name = 'comment'
         ),
     
-    path('photo-detail/<int:pk>',
-         views.DetailView.favocount,
-         name = 'favorite'
-        ),
 
     #以下、7.9にて追加する
     
