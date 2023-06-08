@@ -2,7 +2,7 @@ from django.shortcuts import render
 #django.views.genericからTemplateView、ListViewをインポート
 from django.views.generic import TemplateView, ListView
 #django.views.genericからCreateViewをインポート
-from django.views.generic import CreateView
+from django.views.generic import CreateView,View
 #django.urlsからreverse_lazyをインポート
 from django.urls import reverse_lazy
 #formsモジュールからPhotoPostFormをインポート
@@ -12,12 +12,13 @@ from django.utils.decorators import method_decorator
 #login_requiredをインポート
 from django.contrib.auth.decorators import login_required
 #modelsモジュールからモデルPhotoPostをインポート
-from .models import PhotoPost
+from .models import PhotoPost,subPost
 #django.views.genericからDetailViewをインポート
 from django.views.generic import DetailView
 #django.views.genericからDeleteViewをインポート
 from django.views.generic import DeleteView
 from django.db.models import F
+from django.urls import path
 
 class IndexView(ListView):
     '''トップページのビュー'''
@@ -129,8 +130,27 @@ class UserView(ListView):
             user=user_id).order_by('-posted_at')
         #クエリによって取得されたレコードを返す
         return user_list
+    
+class CommentView(ListView):
+    '''ユーザーの投稿一覧のビュー'''
+    # レコード情報をテンプレートに渡すオブジェクト
+    context_object_name = "object_list"
+    #post.htmlをレンダリングする
+    template_name = 'subposts_list.html'
+    #クラス変数modelにモデルBlogPostを設定
+    model = subPost
 
-class DetailView(DetailView):
+"""     def get_queryset(self):
+
+        #userキーの値（ユーザーテーブルのid）を取得
+        superpost_id = self.kwargs['pk']
+        #filter(フィールド名=id)で絞り込む
+        #filter(superpost=superpost_id)
+        comment_list = subPost.objects.filter(superpost=superpost_id).order_by('-posted_at')
+        #クエリによって取得されたレコードを返す
+        return comment_list """
+
+class DetailView(View):
     '''詳細ページのビュー
     
     投稿記事の詳細を表示するのでDetailViewを継承する
@@ -138,10 +158,27 @@ class DetailView(DetailView):
      template_name: レンダリングするテンプレート
      model: モデルのクラス
     '''
-    #post.htmlをレンダリングする
+    def get(self, request, *args, **kwargs):
+        detail = PhotoPost.objects.get(pk=self.kwargs['pk'])
+        subpost = subPost.objects.filter(superpost = detail.pk).order_by('-posted_at')
+
+        context = { 
+            "detail": detail,
+            "subpost": subpost,
+        }
+        return render(request, "detail.html", context)
+    
+
+    """ #post.htmlをレンダリングする
     template_name = 'detail.html'
     #クラス変数modelにモデルBlogPostを設定
-    model = PhotoPost
+    model = PhotoPost """
+    """ def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['object_list'] = subPost.objects.filter(superpost = self.kwargs["pk"])
+     """
+    
+
 
 #UserView, DetailViewの後に以下のコードを追加する
 class MypageView(ListView):
@@ -246,13 +283,14 @@ class subPostView(CreateView):
         postdata = form.save(commit=False)
         #投稿ユーザのidを取得してモデルのuserフィールドに格納
         postdata.user = self.request.user
+        postdata.superpost=self.kwargs["pk"]
         #投稿データをデータベースに登録
         postdata.save()
+        PhotoPost.objects.filter(pk=self.kwargs["pk"]).update(commentcount=F('commentcount')+1)
         #戻り値はスーパークラスのform_valid()の戻り値(HttpResponseRedirect)
         return super().form_valid(form)
     
-    def commentcount(request, pk):
-        PhotoPost.objects.filter(pk=pk).update(commentcount=F('commentcount')+1)
+        
 
 class subPostSuccessView(TemplateView):
     '''投稿完了ページのビュー

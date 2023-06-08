@@ -1,0 +1,40 @@
+<!--ここまで削除-->
+  <div class="album py-5 bg-light">
+    <!-- Bootstrapのグリッドシステムを適用 -->
+    <div class="container">
+      <!-- 行要素を配置 -->
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <!-- レコードが格納されたobject_listから
+             レコードを１行ずつrecordに取り出す -->
+        <head>
+          <link rel="stylesheet" href="../static/css/list.css">
+        </head>
+        {% for record in object_list %}
+        <!--列要素を配置-->
+        <div class="col">
+          <div class="card shadow-sm">
+            <!--タイトルとボタンを出力するブロック-->
+            <div class="card-body">
+            {{record.comment}}
+            
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <!--投稿したユーザ名を出力-->
+                <a href="{% url 'photo:user_list' user=record.user.id %}">
+                <small class="text-muted">
+                  {{record.user.username}}</small>
+                </a>
+              
+              </div>
+            </div>
+          </div>
+          <!--列要素ここまで-->
+        </div>
+        <!--forブロック終了-->
+        {% endfor %}
+        <!--行要素ここまで-->
+      </div>
+      <!--グリッドシステムここまで-->
+    </div>
+  </div>
+<!--以下削除-->

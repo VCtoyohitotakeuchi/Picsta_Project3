@@ -115,9 +115,9 @@ class subPost(models.Model):
         on_delete=models.CASCADE,
         default=1
         )
-    """ superpost =models.IntegerField(
+    superpost =models.IntegerField(
         default=0
-    ) """
+    )
     #コメント用のフィールド
     comment = models.TextField(
         verbose_name='本文', #フィールドのタイトル
