@@ -6,6 +6,8 @@ app_name = 'photo'
 
 #URLパターンを登録する変数
 urlpatterns = [
+    path('start',views.startview.as_view(),name='drop'),
+
     #photoアプリへのアクセスはviewモジュールのIndexViewを実行
     path('',views.IndexView.as_view(),name='index'),
 
