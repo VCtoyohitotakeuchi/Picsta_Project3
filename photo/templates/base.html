@@ -45,6 +45,22 @@
           font-size: 3.5rem;
         }
       }
+
+      #navbarHeader{
+        background-color: #adadff;
+      }
+
+      #navbar{
+        background-color: #adadff;
+      }
+
+      #title{
+        background-color: #eaeaff;
+      }
+
+      #main{
+        background-color: #eaeaff;
+      }
     </style>
 
   </head>
@@ -52,13 +68,13 @@
     <!-- ページのヘッダー -->
 <header>
      <!-- ナビゲーションバーのヘッダー -->
-  <div class="collapse bg-dark" id="navbarHeader">
+  <div class="collapse" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
           <!--ヘッダーのタイトルと本文-->
           <h4 class="text-white">Picstagram</h4>
-          <p class="text-muted">いまなにしてる?</p>
+          <p class="text-white">いまなにしてる?</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
           <h4 class="text-white">Contact</h4>
@@ -82,7 +98,7 @@
     </div>
   </div>
   <!--ナビゲーションバー-->
-  <div class="navbar navbar-dark bg-dark shadow-sm">
+  <div class="navbar navbar-dark shadow-sm" id="navbar">
     <div class="container">
       <!--トップページへのリンク-->
       <a href="{% url 'photo:index' %}" class="navbar-brand d-flex align-items-center">
@@ -98,12 +114,12 @@
   </div>
 </header>
 <!-- メインコンテンツ -->
-<main style="margin-top:80px">
+<main style="margin-top:23px" id="main">
 <!--<main>タグの要素をすべて削除して以下に書き換え-->
 <!--メインコンテンツの本体部分は各ページのテンプレートで埋め込む-->
   {% block contents %}{% endblock %}
   <div class="col offset-2 py-4"> 
-    <button type="button" onclick="history.back()">前のページへ戻る</button>
+    <a onclick="history.back()" class="btn my-2 text-white" id="button2">前のページへ戻る</a>
   </div>
 
 </main>

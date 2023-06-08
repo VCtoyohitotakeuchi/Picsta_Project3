@@ -1,7 +1,27 @@
 <!--タイトルとナビゲーションボタン-->
+<head>
+  <style>
+    #title{
+      background-color: #eaeaff;
+    }
+
+    #button1{
+      background-color: #adadff;
+    }
+    #button2{
+      background-color: #c6c6c6;
+    }
+    #button3{
+      background-color: #adadff;
+    }
+    #button4{
+      background-color: #c6c6c6;
+    }
+  </style>
+</head>
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="col-lg-6 col-md-8 mx-auto" id="title">
         <!--タイトルと本文-->
         <h1 class="fw-light">Picstagram</h1>
         <p class="lead text-muted">いまなにしてる？</p>
@@ -9,12 +29,12 @@
           <!--ナビゲーションボタン-->
           {% if user.is_authenticated %}
           <!--ログイン中のボタン-->
-          <a href="{% url 'photo:post' %}" class="btn btn-primary my-2">Post</a>
-          <a href="{% url 'accounts:logout' %}" class="btn btn-secondary my-2">Logout</a>
+          <a href="{% url 'photo:post' %}" class="btn my-2 text-white" id="button1">Post</a>
+          <a href="{% url 'accounts:logout' %}" class="btn my-2 text-white" id="button2">Logout</a>
           {% else %}
           <!--ログイン状態ではない場合のボタン-->
-          <a href="{% url 'accounts:signup' %}" class="btn btn-primary my-2">Sign Up Now</a>
-          <a href="{% url 'accounts:login' %}" class="btn btn-secondary my-2">Login</a>
+          <a href="{% url 'accounts:signup' %}" class="btn my-2 text-white" id="button3">Sign Up Now</a>
+          <a href="{% url 'accounts:login' %}" class="btn  my-2 text-white" id="button4">Login</a>
           {% endif %}
         </p>
       </div>
