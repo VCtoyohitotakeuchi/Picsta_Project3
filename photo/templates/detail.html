@@ -15,40 +15,40 @@
                     <link rel="stylesheet" href="../static/css/detail.css">
                 </head>
                 <!-- タイトル -->
-                {% if object.title %}
-                <h2>{{object.title}}</h2>
+                {% if detail.title %}
+                <h2>{{detail.title}}</h2>
                 {% endif %}
                 <!-- コメント -->
-                <p>{{object.comment}}</p>
+                <p>{{detail.comment}}</p>
                 <!-- カテゴリー -->
-                <a href="{% url 'photo:photos_cat' category=object.category.id %}">
-                <p>#{{object.category}}</p>
+                <a href="{% url 'photo:photos_cat' category=detail.category.id %}">
+                <p>#{{detail.category}}</p>
                 </a>
                 <br>
                 <!-- ユーザー名 -->
-                <a href="{% url 'photo:user_list' user=object.user.id %}">
+                <a href="{% url 'photo:user_list' user=detail.user.id %}">
                 <small class="text-muted">
-                    {{object.user.username}}</small>
+                    {{detail.user.username}}</small>
                 </a>
                 <!-- 投稿日時 -->
-                <p>{{object.posted_at}}に投稿</p>
+                <p>{{detail.posted_at}}に投稿</p>
                 <!-- 1枚目の写真 -->
-                <p><img src="{{object.image1.url}}"></img></p>
+                <p><img src="{{detail.image1.url}}"></img></p>
                 <!-- 2枚目の写真が投稿されていたら表示する -->
-                {% if object.image2 %}
-                    <p><img src="{{object.image2.url}}"></img></p>
+                {% if detail.image2 %}
+                    <p><img src="{{detail.image2.url}}"></img></p>
                 {% endif %}
                 <!-- 3枚目の写真が投稿されていたら表示する -->
-                {% if object.image3 %}
-                    <p><img src="{{object.image3.url}}"></img></p>
+                {% if detail.image3 %}
+                    <p><img src="{{detail.image3.url}}"></img></p>
                 {% endif %}
                 <!-- 4枚目の写真が投稿されていたら表示する -->
-                {% if object.image4 %}
-                    <p><img src="{{object.image4.url}}"></img></p>
+                {% if detail.image4 %}
+                    <p><img src="{{detail.image4.url}}"></img></p>
                 {% endif %}
-                {% if object.mov1 %}
+                {% if detail.mov1 %}
                 <hr>
-                <video src="{{object.mov1.url}}" controls>
+                <video src="{{detail.mov1.url}}" controls>
                 動画の再生にはHTML5が必要です。
                 </video>
                 {% endif %}
@@ -56,13 +56,49 @@
             
 
                 <!-- 投稿写真がログイン中のユーザのものであれば削除ボタンを表示 -->
-                {% if request.user == object.user %}
+                {% if request.user == detail.user %}
                 <form method ="POST">
                 <!-- リンク先のURL 
                     photo/<Photo postsテーブルのid値>/delete/-->
-                <a href="{% url 'photo:photo_delete' object.pk %}"
+                <a href="{% url 'photo:photo_delete' detail.pk %}"
                     class="btn btn-primary my-2">削除する</a>
                 {% endif %}
+                {% comment %} <button type="button"
+                    class="btn btn-sm btn-outline-secondary"
+                    onclick="location.href='{% url 'photo:favorite' pk=detail.pk %}'">
+                    &#x2764;:{{detail.favorite}}  {{detail.pk}}
+                </button> {% endcomment %}
+                <button type="button"
+                    class="btn btn-sm btn-outline-secondary"
+                    onclick="location.href='{% url 'photo:comment' pk=detail.pk %}'">
+                    Comment:{{detail.commentcount}}
+                </button>
+
+                {% for record in subpost %}
+                <!--列要素を配置-->
+                <div class="col">
+                <div class="card shadow-sm">
+                    <!--タイトルとボタンを出力するブロック-->
+                    <div class="card-body">
+                    <small>{{record.posted_at}}</small><br>
+                    {{record.comment}}
+                    
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!--投稿したユーザ名を出力-->
+                        <a href="{% url 'photo:user_list' user=record.user.id %}">
+                        <small class="text-muted">
+                        {{record.user.username}}</small>
+                        </a>
+                    
+                    </div>
+                    </div>
+                </div>
+                <!--列要素ここまで-->
+                </div>
+                <!--forブロック終了-->
+                {% endfor %}
+
             </div>
         </div>
     </div>

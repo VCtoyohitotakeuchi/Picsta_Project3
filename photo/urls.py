@@ -6,6 +6,8 @@ app_name = 'photo'
 
 #URLパターンを登録する変数
 urlpatterns = [
+    path('start',views.startview.as_view(),name='drop'),
+
     #photoアプリへのアクセスはviewモジュールのIndexViewを実行
     path('',views.IndexView.as_view(),name='index'),
 
@@ -16,6 +18,9 @@ urlpatterns = [
     path('post_done/',
          views.PostSuccessView.as_view(),
          name='post_done'),
+    path('subpost_done/',
+         views.subPostSuccessView.as_view(),
+         name='subpost_done'),
     
     #カテゴリ一覧ページ
     #photos/<Categorysテーブルのid値>にマッチング
@@ -41,6 +46,12 @@ urlpatterns = [
          views.DetailView.as_view(),
          name = 'photo_detail'
         ),
+    #コメント機能
+    path('photo-detail/<int:pk>/subpost',
+         views.subPostView.as_view(),
+         name = 'comment'
+        ),
+    
 
     #以下、7.9にて追加する
     

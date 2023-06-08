@@ -2,21 +2,23 @@ from django.shortcuts import render
 #django.views.genericからTemplateView、ListViewをインポート
 from django.views.generic import TemplateView, ListView
 #django.views.genericからCreateViewをインポート
-from django.views.generic import CreateView
+from django.views.generic import CreateView,View
 #django.urlsからreverse_lazyをインポート
 from django.urls import reverse_lazy
 #formsモジュールからPhotoPostFormをインポート
-from .forms import PhotoPostForm
+from .forms import PhotoPostForm,subPostForm
 #method_decoratorをインポート
 from django.utils.decorators import method_decorator
 #login_requiredをインポート
 from django.contrib.auth.decorators import login_required
 #modelsモジュールからモデルPhotoPostをインポート
-from .models import PhotoPost
+from .models import PhotoPost,subPost
 #django.views.genericからDetailViewをインポート
 from django.views.generic import DetailView
 #django.views.genericからDeleteViewをインポート
 from django.views.generic import DeleteView
+from django.db.models import F
+from django.urls import path
 
 class IndexView(ListView):
     '''トップページのビュー'''
@@ -128,8 +130,27 @@ class UserView(ListView):
             user=user_id).order_by('-posted_at')
         #クエリによって取得されたレコードを返す
         return user_list
+    
+class CommentView(ListView):
+    '''ユーザーの投稿一覧のビュー'''
+    # レコード情報をテンプレートに渡すオブジェクト
+    context_object_name = "object_list"
+    #post.htmlをレンダリングする
+    template_name = 'subposts_list.html'
+    #クラス変数modelにモデルBlogPostを設定
+    model = subPost
 
-class DetailView(DetailView):
+"""     def get_queryset(self):
+
+        #userキーの値（ユーザーテーブルのid）を取得
+        superpost_id = self.kwargs['pk']
+        #filter(フィールド名=id)で絞り込む
+        #filter(superpost=superpost_id)
+        comment_list = subPost.objects.filter(superpost=superpost_id).order_by('-posted_at')
+        #クエリによって取得されたレコードを返す
+        return comment_list """
+
+class DetailView(View):
     '''詳細ページのビュー
     
     投稿記事の詳細を表示するのでDetailViewを継承する
@@ -137,10 +158,27 @@ class DetailView(DetailView):
      template_name: レンダリングするテンプレート
      model: モデルのクラス
     '''
-    #post.htmlをレンダリングする
+    def get(self, request, *args, **kwargs):
+        detail = PhotoPost.objects.get(pk=self.kwargs['pk'])
+        subpost = subPost.objects.filter(superpost = detail.pk).order_by('-posted_at')
+
+        context = { 
+            "detail": detail,
+            "subpost": subpost,
+        }
+        return render(request, "detail.html", context)
+    
+
+    """ #post.htmlをレンダリングする
     template_name = 'detail.html'
     #クラス変数modelにモデルBlogPostを設定
-    model = PhotoPost
+    model = PhotoPost """
+    """ def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['object_list'] = subPost.objects.filter(superpost = self.kwargs["pk"])
+     """
+    
+
 
 #UserView, DetailViewの後に以下のコードを追加する
 class MypageView(ListView):
@@ -217,3 +255,51 @@ class PhotoDeleteView(DeleteView):
         #クエリによって取得されたレコードを返す
         return user_list
     '''
+
+@method_decorator(login_required, name='dispatch')
+class subPostView(CreateView):
+    #form.pyPhotoPostFormをフォームクラスとして登録
+    form_class = subPostForm
+    #レンタリングするテンプレート
+    template_name = "subpost_photo.html"
+    #フォームデータ登録完了後のリダイレクト先
+    success_url = reverse_lazy('photo:subpost_done')
+
+    def form_valid(self, form):
+        '''CreateViewクラスのform_valid()をオーバーランド
+        
+        フォームのバリデーションを通過したときに呼ばれる
+        フォームデータの登録をここで行う
+
+        parameters:
+          form(django.forms.Form):
+            form_classに格納されているPhotoPostFormオブジェクト
+        Return:
+          HttpResponseRedirectオブジェクト:
+            スーパークラスのform_valid()の戻り値を返すことで、
+            success_urlで設定されているURLにリダイレクトされる
+        '''
+        #commit= FalseにしてPOSTされたデータを取得
+        postdata = form.save(commit=False)
+        #投稿ユーザのidを取得してモデルのuserフィールドに格納
+        postdata.user = self.request.user
+        postdata.superpost=self.kwargs["pk"]
+        #投稿データをデータベースに登録
+        postdata.save()
+        PhotoPost.objects.filter(pk=self.kwargs["pk"]).update(commentcount=F('commentcount')+1)
+        #戻り値はスーパークラスのform_valid()の戻り値(HttpResponseRedirect)
+        return super().form_valid(form)
+    
+        
+
+class subPostSuccessView(TemplateView):
+    '''投稿完了ページのビュー
+        
+    Attributes:
+        template_name: レタリングするテンプレート
+    '''
+    #index.htmlをレンダリングする
+    template_name = 'subpost_success.html'
+
+class startview(TemplateView):
+    template_name = 'drop.html'

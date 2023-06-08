@@ -1,5 +1,12 @@
 <!--ここまで削除-->
-  <div class="album py-5 bg-light">
+<head>
+  <style>
+    #albam{
+      background-color: #eaeaff;
+    }
+  </style>
+</head>
+  <div class="album py-5" id="albam">
     <!-- Bootstrapのグリッドシステムを適用 -->
     <div class="container">
       <!-- 行要素を配置 -->
@@ -76,6 +83,9 @@
             <!--タイトルとボタンを出力するブロック-->
             <div class="card-body">
             <!--titleフィールドを出力-->
+            {% if record.mov1 %}
+            <text>&#x1f3a5;</text>
+            {% endif %}
             {% if record.title %}
             {{record.title}}
             {% else %}
