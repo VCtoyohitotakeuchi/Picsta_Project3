@@ -4,7 +4,12 @@
     #title{
       background-color: #eaeaff;
     }
-
+    #picsta{
+      font-family: 'Segoe Script',sans-serif;
+    }
+    #picsta2{
+      font-family: 'Segoe Script',sans-serif;
+    }
     #button1{
       background-color: #adadff;
     }
@@ -23,8 +28,8 @@
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto" id="title">
         <!--タイトルと本文-->
-        <h1 class="fw-light">Picstagram</h1>
-        <p class="lead text-muted">いまなにしてる？</p>
+        <h1 class="fw-light" id="picsta">Picstagram</h1>
+        <p class="lead text-muted" id="picsta2">What are you doing now?</p>
         <p>
           <!--ナビゲーションボタン-->
           {% if user.is_authenticated %}
