@@ -262,3 +262,6 @@ class subPostSuccessView(TemplateView):
     '''
     #index.htmlをレンダリングする
     template_name = 'subpost_success.html'
+
+class startview(TemplateView):
+    template_name = 'drop.html'
