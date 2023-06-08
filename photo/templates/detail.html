@@ -63,19 +63,24 @@
                 <a href="{% url 'photo:photo_delete' detail.pk %}"
                     class="btn btn-primary my-2">削除する</a>
                 {% endif %}
+                {% comment %} <button type="button"
+                    class="btn btn-sm btn-outline-secondary"
+                    onclick="location.href='{% url 'photo:favorite' pk=detail.pk %}'">
+                    &#x2764;:{{detail.favorite}}  {{detail.pk}}
+                </button> {% endcomment %}
                 <button type="button"
                     class="btn btn-sm btn-outline-secondary"
                     onclick="location.href='{% url 'photo:comment' pk=detail.pk %}'">
                     Comment:{{detail.commentcount}}
                 </button>
+
                 {% for record in subpost %}
-
-
                 <!--列要素を配置-->
                 <div class="col">
                 <div class="card shadow-sm">
                     <!--タイトルとボタンを出力するブロック-->
                     <div class="card-body">
+                    <small>{{record.posted_at}}</small><br>
                     {{record.comment}}
                     
                     </p>

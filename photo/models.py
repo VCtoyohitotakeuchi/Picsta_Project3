@@ -90,6 +90,9 @@ class PhotoPost(models.Model):
         blank=True, #フィールド値の設定は必須ではない
         null=True #データベースにnullが保存されることを許容
         )
+    favorite =models.IntegerField(
+        default=0
+    )
     commentcount =models.IntegerField(
         default=0
     )
