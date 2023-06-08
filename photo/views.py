@@ -168,13 +168,7 @@ class DetailView(View):
         }
         return render(request, "detail.html", context)
     
-    def favocount(self,request,pk):
-        post=PhotoPost.objects.get(id=pk)
-        post.favorite=F('favorite')+1
-        post.save()
 
-        #PhotoPost.objects.filter(id=pk).update(favorite=F('favorite')+1)
-    
     """ #post.htmlをレンダリングする
     template_name = 'detail.html'
     #クラス変数modelにモデルBlogPostを設定
@@ -307,6 +301,5 @@ class subPostSuccessView(TemplateView):
     #index.htmlをレンダリングする
     template_name = 'subpost_success.html'
 
-    
-def favocount(request,pk):
-    PhotoPost.objects.filter(pk=pk).update(favorite=F('favorite')+1)
+class startview(TemplateView):
+    template_name = 'drop.html'
