@@ -68,11 +68,13 @@
                     onclick="location.href='{% url 'photo:favorite' pk=detail.pk %}'">
                     &#x2764;:{{detail.favorite}}  {{detail.pk}}
                 </button> {% endcomment %}
+                {% if user.is_authenticated %}
                 <button type="button"
                     class="btn btn-sm btn-outline-secondary"
                     onclick="location.href='{% url 'photo:comment' pk=detail.pk %}'">
                     Comment:{{detail.commentcount}}
                 </button>
+                {% endif %}
 
                 {% for record in subpost %}
                 <!--列要素を配置-->
